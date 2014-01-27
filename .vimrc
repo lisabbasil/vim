@@ -1,9 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
-set history=700
-
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -46,6 +43,9 @@ set nocompatible	" Use Vim defaults instead of 100% vi compatibility
 " modelines have historically been a source of security/resource
 " vulnerabilities -- disable by default, even when 'nocompatible' is set
 set nomodeline
+
+" Sets how many lines of history VIM has to remember
+set history=100
 
 " Set this, so the background color will not change inside tmux (http://snk.tuxfamily.org/log/vim-256color-bce.html)
 set t_ut=
@@ -111,6 +111,13 @@ set tm=500
 
 " Add a bit extra margin to the left
 set foldcolumn=1
+
+" For LaTeX suite
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+let g:Tex_UseMakefile=1
+let TCTARGET='default'
+let TVTARGET='default'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -206,10 +213,10 @@ map k gk
 
 
 " Smart way to move between windows (deactivated as I use those shortcuts in tmux)
-"map <C-j> <C-W>j
-"map <C-k> <C-W>k
-"map <C-h> <C-W>h
-"map <C-l> <C-W>l
+nmap <leader>j <C-W>j
+nmap <leader>k <C-W>k
+nmap <leader>h <C-W>h
+nmap <leader>l <C-W>l
 
 " Specify the behavior when switching between buffers 
 try
@@ -273,11 +280,11 @@ map <leader>pr :!evince 201*.pdf<cr>
 " => Turn persistent undo on 
 "    means that you can undo even when you close a buffer/VIM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-try
-    set undodir=~/.vim/temp_dirs/undodir
+"try
+    set undodir=~/.vim/temp/undo
     set undofile
-catch
-endtry
+"catch
+"endtry
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -317,18 +324,34 @@ map <leader>n :make!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Sessions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""" Check if file exists
+function! FileExists(file)
+   if filereadable(a:file)
+       return 1
+   endif
+endfunction
+
+if FileExists('.vimrcPrivat')
+    execute 'source .vimrcPrivat'
+endif
+
 function! RestoreSession()
     if argc() == 0 "vim called without arguments
-        execute 'source .Session.vim'
-   end
+        if FileExists('.Session.vim')
+            execute 'source .Session.vim'
+        endif
+   endif
 endfunction
 
 autocmd VimEnter * call RestoreSession()
 autocmd VimLeave * :mksession! .Session.vim
 
 " Store foldings
-au BufWinLeave ?* mkview
-au BufWinEnter ?* silent loadview
+"au BufWinLeave ?* mkview
+"au BufWinEnter ?* silent loadview
+au BufWinLeave *.* mkview
+au BufWinEnter *.* silent loadview
 
 "From http://vim.1045645.n5.nabble.com/Custom-tabline-Non-gui-vim-td1190544.html
 "if exists("+guioptions") 
