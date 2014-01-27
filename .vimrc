@@ -116,9 +116,7 @@ set foldcolumn=1
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Tex_UseMakefile=1
-let TCTARGET='default'
-let TVTARGET='default'
-
+let g:Tex_GotoError=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -325,6 +323,9 @@ map <leader>n :make!<cr>
 " => Sessions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+""" Some plugins change directory. Store directory where vim was opened in a variable
+let g:vimHomeDir=getcwd()
+
 """ Check if file exists
 function! FileExists(file)
    if filereadable(a:file)
@@ -332,10 +333,12 @@ function! FileExists(file)
    endif
 endfunction
 
+""" If available, source .vimrcPrivat with some directory specific settings
 if FileExists('.vimrcPrivat')
     execute 'source .vimrcPrivat'
 endif
 
+""" Restore session
 function! RestoreSession()
     if argc() == 0 "vim called without arguments
         if FileExists('.Session.vim')
@@ -344,8 +347,15 @@ function! RestoreSession()
    endif
 endfunction
 
+""" Before writing .Session.vim, change to directory where vim was opened (to not mix up different sessions)
+function! MakeSession()
+    cd `=g:vimHomeDir`
+    mksession! .Session.vim
+endfunction
+
+""" Restore session at startup (if available), write session at end
 autocmd VimEnter * call RestoreSession()
-autocmd VimLeave * :mksession! .Session.vim
+autocmd VimLeave * call MakeSession()
 
 " Store foldings
 "au BufWinLeave ?* mkview
