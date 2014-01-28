@@ -126,6 +126,15 @@ let g:Tex_DefaultTargetFormat='pdf'
 """ Define what to fold (.= for appending!)
 let g:Tex_FoldedEnvironments=',itemize,sideways'
 
+""" Compiling LaTeXSuite with <leader>ll does change the directory (only for pdflatex) and can't find the log file afterwards, so we cd back to vimHomeDir
+function! CompileLaTeXSuite()
+	call Tex_RunLaTeX()
+    cd `=g:vimHomeDir`
+endfunction
+
+""" For tex files, overwrite compile shortcut <leader>m with the one from LaTeX suite
+autocmd FileType tex noremap <buffer> <leader>m :call CompileLaTeXSuite()<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
