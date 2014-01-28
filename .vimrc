@@ -123,6 +123,8 @@ let g:Tex_GotoError=0
 let g:Tex_IgnoreLevel=0   
 """ For pdflatex
 let g:Tex_DefaultTargetFormat='pdf'
+""" Define what to fold (.= for appending!)
+let g:Tex_FoldedEnvironments=',itemize,sideways'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -176,6 +178,8 @@ set smarttab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+" only 2 spaces for tex files!
+autocmd FileType tex setlocal shiftwidth=2 tabstop=2
 
 " Linebreak on 160 characters
 set lbr
@@ -339,9 +343,9 @@ function! FileExists(file)
    endif
 endfunction
 
-""" If available, source .vimrcPrivat with some directory specific settings
-if FileExists('.vimrcPrivat')
-    execute 'source .vimrcPrivat'
+""" If available, source .vimrcPrivate with some directory specific settings
+if FileExists('.vimrcPrivate')
+    execute 'source .vimrcPrivate'
 endif
 
 """ Restore session
@@ -418,3 +422,4 @@ if exists("+showtabline")
 "   map     <S-F10>  :tabprev<CR> 
 "   map!    <S-F10>  <C-O>:tabprev<CR> 
 endif 
+
