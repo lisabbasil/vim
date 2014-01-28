@@ -117,8 +117,8 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 """ Use a makefile; define target in .vimrcPrivat
 let g:Tex_UseMakefile=1
-""" Don't jump to error
-let g:Tex_GotoError=0
+""" Jump to error
+let g:Tex_GotoError=1
 """ Output all warnings
 let g:Tex_IgnoreLevel=0   
 """ For pdflatex
