@@ -92,6 +92,10 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch 
 
+" Map * and # to itself but prevent jumping to next (last) occurrence
+nnoremap * *``
+nnoremap # #``
+
 " Don't redraw while executing macros (good performance config)
 set lazyredraw 
 
