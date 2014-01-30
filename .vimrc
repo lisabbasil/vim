@@ -170,6 +170,9 @@ hi TabLineFill ctermbg=240
 hi TabLine ctermbg=22
 hi TabLineSel ctermbg=58
 
+" Make warnings more visible
+hi WarningMsg ctermfg=white ctermbg=red
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
