@@ -122,7 +122,7 @@ let g:tex_flavor='latex'
 """ Use a makefile; define target in .vimrcPrivat
 let g:Tex_UseMakefile=1
 """ Jump to error
-let g:Tex_GotoError=1
+let g:Tex_GotoError=0
 """ Output all warnings
 let g:Tex_IgnoreLevel=0   
 """ For pdflatex
