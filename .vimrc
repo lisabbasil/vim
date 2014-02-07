@@ -37,6 +37,8 @@ noremap <leader>py :!python<cr>
 command Wdiff :w !diff -u % -
 
 let g:yankring_history_dir='$HOME/.vim/temp'
+""" y% seems to be missing from yankring
+let g:yankring_n_keys='y%'
 let MRU_File=expand('$HOME/.vim/temp/mru.txt')
 
 set nocompatible	" Use Vim defaults instead of 100% vi compatibility
