@@ -15,6 +15,8 @@ let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
+" Allow saving of files as sudo when
+cmap w!! w !sudo tee > /dev/null %
 
 inoremap jj <ESC>
 noremap <leader>q :qa<cr>
