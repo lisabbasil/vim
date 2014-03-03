@@ -40,7 +40,7 @@ command Wdiff :w !diff -u % -
 
 let g:yankring_history_dir='$HOME/.vim/temp'
 """ Some yank commands seem to be missing from yankring
-let g:yankring_n_keys='y y% D'
+let g:yankring_n_keys='y% D'
 let g:yankring_n_keys='yi( yi) yi{ yi} yi" yi[ yi]'
 let g:yankring_n_keys='di( di) di{ di} di" di[ di]'
 let g:yankring_n_keys="yi'"
