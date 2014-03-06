@@ -38,13 +38,6 @@ noremap <leader>py :!python<cr>
 """ Check for differences between file in buffer and on disk
 command Wdiff :w !diff -u % -
 
-let g:yankring_history_dir='$HOME/.vim/temp'
-""" Some yank commands seem to be missing from yankring
-let g:yankring_n_keys='y% D'
-let g:yankring_n_keys='yi( yi) yi{ yi} yi" yi[ yi]'
-let g:yankring_n_keys='di( di) di{ di} di" di[ di]'
-let g:yankring_n_keys="yi'"
-let g:yankring_n_keys="di'"
 let MRU_File=expand('$HOME/.vim/temp/mru.txt')
 
 set nocompatible	" Use Vim defaults instead of 100% vi compatibility
@@ -52,7 +45,7 @@ set nocompatible	" Use Vim defaults instead of 100% vi compatibility
 " vulnerabilities -- disable by default, even when 'nocompatible' is set
 set nomodeline
 
-" Sets how many lines of history VIM has to remember
+" Sets how many lines of history vim has to remember
 set history=100
 
 " Set this, so the background color will not change inside tmux (http://snk.tuxfamily.org/log/vim-256color-bce.html)
